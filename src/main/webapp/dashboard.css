@@ -1,0 +1,81 @@
+.active{
+    background-color: #f7a325;
+}
+.container-fluid{
+   background-color:  #12492f;
+  
+}
+.color-me{
+    color: white !important;
+}
+.navsize{
+    font-size: 20px !important;
+}
+.navsizebar{
+    font-size:30px !important;
+}
+.navbar{
+    padding-top: 0rem !important;
+}
+
+
+.caption{
+    font-size: 25px;
+    color:black;
+     font-family: Copperplate, "Copperplate", fantasy;
+     
+}
+
+label{
+    width:160px;
+    display:inline-block;
+    font-family: "Gill Sans", sans-serif;
+    
+}
+.address{
+    vertical-align: top;
+}
+
+.form-box{
+     margin-left: 400px;
+     margin-right: 400px;
+    border-radius: 10px;
+  border-style: solid;
+ align-content: center;
+ background-color: #ffca7a;
+    
+}
+
+form{
+    padding: 10px;
+}
+legend{
+    text-align: center;
+}
+.buttons{
+    text-align: center;
+}
+
+.gradient-custom {
+    /* fallback for old browsers */
+    background: #93fba4;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to bottom right, rgb(196, 227, 148), rgb(150, 245, 87));
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to bottom right, rgb(196, 227, 148), rgb(150, 245, 87))
+}
+
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+    font-size: 1rem;
+    line-height: 2.15;
+    padding-left: .75em;
+    padding-right: .75em;
+}
+.card-registration .select-arrow {
+    top: 13px;
+}
+.address-textarea{
+    width: 100%;
+}
