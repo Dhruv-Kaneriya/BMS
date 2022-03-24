@@ -16,80 +16,77 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Create Account</title>
-    </head>
-    <body>
-         <%
-                String fname = request.getParameter("fname");
-                String lname = request.getParameter("lname");
-                String aadhar = request.getParameter("aadhar");
-                String mobile = request.getParameter("mobile");
-                String email = request.getParameter("email");
-                String password = request.getParameter("password");
-                String dob = request.getParameter("dob");
-                String address=request.getParameter("address");
-              //  SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                //java.sql.Date date = formatter.parse(dob);
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Create Account</title>
+</head>
+<body>
+<%
+    String fname = request.getParameter("fname");
+    String lname = request.getParameter("lname");
+    String aadhar = request.getParameter("aadhar");
+    String mobile = request.getParameter("mobile");
+    String password = request.getParameter("password");
+    String dob = request.getParameter("dob");
+    String address=request.getParameter("address");
+    String gender= request.getParameter("inlineRadioOptions");
+    //  SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    //java.sql.Date date = formatter.parse(dob);
 //               java.util.Date utilDate = new SimpleDateFormat("dd-MM-yyyy").parse(dob);
 //                java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-       
-                java.sql.Date sqlDate=java.sql.Date.valueOf(dob);
-                
-                Date acdate = Calendar.getInstance().getTime();               
-                 DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");  
-                String accno = dateFormat.format(acdate);  
-                //Parsing the given String to Date object
-               
-                try {
 
-                    //Step 1. Register the Driver
-                             Connection conn = DatabaseConnection.initializeDatabase();
+    java.sql.Date sqlDate=java.sql.Date.valueOf(dob);
 
-                    //Step 3. Create Statement
-                    PreparedStatement pstmt = conn.prepareStatement("Select * from CUSTOMERS where aadhar=? or email=?");
-                    pstmt.setString(1, aadhar);
-                         pstmt.setString(2, email);
-                    //Step 4. Execute Query
-                    ResultSet rs = pstmt.executeQuery();
+    Date acdate = Calendar.getInstance().getTime();
+    DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+    String accno = dateFormat.format(acdate);
+    //Parsing the given String to Date object
 
-                    if (rs.next()) {
-                        out.println("<script type=\"text/javascript\">");
-   out.println("alert('Account Already Exist');");
-   out.println("location='dashboard.jsp';");
-   out.println("</script>");
+    try {
 
-       
-                    }
-                    else
-                    {
-                        pstmt=conn.prepareStatement("Insert into CUSTOMERS (accno,firstname,lastname,aadhar,mobile,dob,email,password,address) values(?,?,?,?,?,?,?,?,?)");
-                       pstmt.setString(1,accno);
-                        pstmt.setString(2,fname);
-                        pstmt.setString(3,lname);
-                        pstmt.setString(4,aadhar);
-                        pstmt.setString(5,mobile);
-                        pstmt.setDate(6,sqlDate);
-                        pstmt.setString(7,email);
-                        pstmt.setString(8,password);
-                        pstmt.setString(9,address);
-                        pstmt.executeQuery();
-                       
-                        out.println("<script type=\"text/javascript\">");
-                        out.println("alert('Account Successfully Created');");
-                        out.println("location='dashboard.jsp';");
-                        out.println("</script>");
-                       
-                    }
-             conn.close();
-                } catch (Exception e) {
-                    out.println("<script type=\"text/javascript\">");
-                        out.println("alert('An Error Occured!');");
-                        out.println("location='dashboard.jsp';");
-                        out.println("</script>");
-                       
-                }
-            %>
-    </body>
+        //Step 1. Register the Driver
+        Connection conn = DatabaseConnection.initializeDatabase();
+
+        //Step 3. Create Statement
+        PreparedStatement pstmt = conn.prepareStatement("Select * from CUSTOMERS where aadhar=?");
+        pstmt.setString(1, aadhar);
+
+        //Step 4. Execute Query
+        ResultSet rs = pstmt.executeQuery();
+
+        if (rs.next()) {
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('Account Already Exist');");
+            out.println("location='dashboard.jsp';");
+            out.println("</script>");
+
+
+        }
+        else
+        {
+            pstmt=conn.prepareStatement("Insert into CUSTOMERS (accno,firstname,lastname,aadhar,mobile,dob,password,address,gender) values(?,?,?,?,?,?,?,?,?)");
+            pstmt.setString(1,accno);
+            pstmt.setString(2,fname);
+            pstmt.setString(3,lname);
+            pstmt.setString(4,aadhar);
+            pstmt.setString(5,mobile);
+            pstmt.setDate(6,sqlDate);
+            pstmt.setString(7,password);
+            pstmt.setString(8,address);
+            pstmt.setString(9,gender);
+            pstmt.executeQuery();
+
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('Account Successfully Created');");
+            out.println("location='dashboard.jsp';");
+            out.println("</script>");
+
+        }
+        conn.close();
+    } catch (Exception e) {
+        out.println(e);
+
+    }
+%>
+</body>
 </html>

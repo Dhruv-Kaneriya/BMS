@@ -5,13 +5,13 @@
 --%>
 <%@page import="java.sql.*"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.Date"%>"
+<%@page import="java.util.Date"%>
 
 <%@page import="java.io.PrintWriter"%>
 
 <%@page import="java.text.DateFormat"%>
 <%@page import="java.util.Calendar"%>
-<%@page import="com.example.testdelete.DatabaseConnection"%>;
+<%@page import="com.example.testdelete.DatabaseConnection"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -26,7 +26,6 @@
     String lname = request.getParameter("lname");
     String aadhar = request.getParameter("aadhar");
     String mobile = request.getParameter("mobile");
-    String email = request.getParameter("email");
     String password = request.getParameter("password");
     String dob = request.getParameter("dob");
     String address=request.getParameter("address");
@@ -49,9 +48,9 @@
         Connection conn = DatabaseConnection.initializeDatabase();
 
         //Step 3. Create Statement
-        PreparedStatement pstmt = conn.prepareStatement("Select * from CUSTOMERS where aadhar=? or email=?");
+        PreparedStatement pstmt = conn.prepareStatement("Select * from CUSTOMERS where aadhar=?");
         pstmt.setString(1, aadhar);
-        pstmt.setString(2, email);
+
         //Step 4. Execute Query
         ResultSet rs = pstmt.executeQuery();
 
@@ -65,24 +64,33 @@
         }
         else
         {
-            pstmt=conn.prepareStatement("Insert into CUSTOMERS (accno,firstname,lastname,aadhar,mobile,dob,email,password,address,gender) values(?,?,?,?,?,?,?,?,?,?)");
+            pstmt=conn.prepareStatement("Insert into CUSTOMERS (accno,firstname,lastname,aadhar,mobile,dob,password,address,gender) values(?,?,?,?,?,?,?,?,?)");
             pstmt.setString(1,accno);
             pstmt.setString(2,fname);
             pstmt.setString(3,lname);
             pstmt.setString(4,aadhar);
             pstmt.setString(5,mobile);
             pstmt.setDate(6,sqlDate);
-            pstmt.setString(7,email);
-            pstmt.setString(8,password);
-            pstmt.setString(9,address);
-            pstmt.setString(10,gender);
+            pstmt.setString(7,password);
+            pstmt.setString(8,address);
+            pstmt.setString(9,gender);
             pstmt.executeQuery();
 
-            out.println("<script type=\"text/javascript\">");
-            out.println("alert('Account Successfully Created');");
-            out.println("location='dashboard.jsp';");
-            out.println("</script>");
+            pstmt=conn.prepareStatement("Insert into BALANCE (accno,balance) values(?,?)");
+            pstmt.setString(1,accno);
+            pstmt.setInt(2,0);
+            pstmt.executeQuery();
+            String str="Account Created Successfully!\\nGenerated Account Number is: ";
+            String mes=str.concat(accno);
+            %>
 
+           <script>
+
+                   alert("<%=mes%>");
+               window.location.href = "http://localhost:8080/Bank/dashboard.jsp";
+            </script>
+
+<%
         }
         conn.close();
     } catch (Exception e) {
