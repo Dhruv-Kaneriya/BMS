@@ -269,7 +269,6 @@
                                                 name="inlineRadioOptions"
                                                 id="femaleGender"
                                                 value="Female"
-                                                checked
                                         />
                                         <label class="form-check-label" for="femaleGender">Female</label>
                                     </div>
