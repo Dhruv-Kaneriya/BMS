@@ -170,7 +170,7 @@ String get_accno= request.getParameter("accinput");
                 <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
                     <div class="card-body p-4 p-md-5">
                         <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Edit Account Details</h3>
-                   <form name="form" action="UpdateAccountDetails.jsp" onsubmit="return validateform(this)">
+                   <form name="form" action="edit_account.jsp" onsubmit="return validateform(this)">
 
                             <div class="row">
                                 <div class="col-md-6 mb-4">
@@ -290,7 +290,7 @@ String get_accno= request.getParameter("accinput");
                                 </div>
                             </div>
 
-                       <input type="hidden" id="accno" name="accno" value=<%=get_accno%>>
+
                             <div class="mt-4 pt-2">
                                 <input class="btn btn-primary btn-lg" type="submit" value="Edit" />
                             </div>

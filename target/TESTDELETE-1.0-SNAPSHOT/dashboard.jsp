@@ -125,8 +125,12 @@
                     <a class="nav-link active navsize" aria-current="page" href="dashboard.jsp">Home</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link color-me navsize" href="EditAccountDetails.jsp">Edit Account Details</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link color-me navsize" href="deposit.jsp">Deposit</a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link color-me navsize" href="#">Withdraw</a>
                 </li>
