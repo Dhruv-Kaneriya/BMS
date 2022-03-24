@@ -15,7 +15,8 @@
     font-size:30px !important;
 }
 .navbar{
-    padding-top: 0rem !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
 }
 
 
@@ -61,10 +62,10 @@ legend{
     background: #93fba4;
 
     /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to bottom right, rgb(196, 227, 148), rgb(150, 245, 87));
+    background: -webkit-linear-gradient(to bottom right, rgb(101, 161, 38), rgb(27, 80, 13));
 
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to bottom right, rgb(196, 227, 148), rgb(150, 245, 87))
+    background: linear-gradient(to bottom right, rgb(101, 161, 38), rgb(27, 80, 13))
 }
 
 .card-registration .select-input.form-control[readonly]:not([disabled]) {
