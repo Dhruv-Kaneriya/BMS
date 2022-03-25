@@ -6,11 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@page import="java.sql.*"%>
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.Date"%>
-<%@page import="java.io.PrintWriter"%>
-<%@page import="java.text.DateFormat"%>
-<%@page import="java.util.Calendar"%>
 <%@page import="com.example.testdelete.DatabaseConnection"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
