@@ -3,15 +3,18 @@
     Created on : 22 Mar, 2022, 4:04:30 PM
     Author     : Dhruv
 --%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Dashboard</title>
     <link rel="stylesheet" href="dashboard.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
 
 
     <script>
@@ -21,7 +24,7 @@
         var ck_mobile = /^[0-9]{10,10}$/;
         var ck_password = /^[a-zA-Z0-9!@#$%^&*()_]{8,}$/;
         var ck_conpassword = /^[a-zA-Z0-9!@#$%^&*()_]{8,}$/;
-        var ck_address=/^[a-zA-Z0-9\s,.'-]{3,}$/ ;
+        var ck_address = /^[a-zA-Z0-9\s,.'-]{3,}$/;
 
         function validateform(form) {
 
@@ -31,7 +34,7 @@
             var mobile = form.mobile.value;
             var password = form.password.value;
             var conpassword = form.conpassword.value;
-            var address=form.address.value;
+            var address = form.address.value;
             var errors = [];
             if (!ck_fname.test(fname)) {
                 errors[errors.length] = "First Name should only contain alphabets and atleast of size 3!";
@@ -57,7 +60,7 @@
                 errors[errors.length] = "Confirm Password should be same as Password";
 
             }
-            if(!ck_address.test(address)){
+            if (!ck_address.test(address)) {
                 errors[errors.length] = "Address should be of atleast size 3 and may contain special symbols out of (\s,.'-)";
             }
 
@@ -92,6 +95,7 @@
             }
             return true;
         }
+
         function reportErrors(errors) {
             var msg = "Following Conditions should be Satisfied!\nKindly resolve them...";
             for (var i = 0; i < errors.length; i++) {
@@ -106,9 +110,9 @@
 <body>
 <%
 
-    String sessionid=(String)session.getAttribute("id");
+    String sessionid = (String) session.getAttribute("id");
 
-    if(sessionid==null||sessionid.equals("")){
+    if (sessionid == null || sessionid.equals("")) {
 %>
 <jsp:forward page="index.html"/>
 <%}%>
@@ -116,7 +120,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid ">
         <a class="navbar-brand color-me navsizebar" href="#">Hindustan Bank</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -147,50 +152,6 @@
         </div>
     </div>
 </nav>
-<%--        <div class="form-box">--%>
-<%--          --%>
-<%--            <form name="form" action="create_account.jsp" onsubmit="return validateform(this)">--%>
-<%--            <fieldset>--%>
-<%--                <legend class="caption">Create Account</legend>--%>
-<%--                <br><br>--%>
-<%--                <label name="fname"><b>First Name:&nbsp;</b></label>--%>
-<%--            <input type="text" name="fname" required autocomplete="off" /><br>--%>
-<%--            <br>--%>
-<%--            <label name="lname"><b>Last Name:&nbsp;</b></label>--%>
-<%--            <input type="text" name="lname" required autocomplete="off" />--%>
-<%--                 <br>--%>
-<%--                      <br>--%>
-<%--            <label name="aadhar"><b>Aadhar Number:&nbsp;</b></label>--%>
-<%--             <input type="text" name="aadhar" required autocomplete="off" />--%>
-<%--                <br>--%>
-<%--                      <br>--%>
-<%--            <label name="aadhar"><b>Contact Number:&nbsp;</b></label>--%>
-<%--             <input type="text" name="mobile" required autocomplete="off" />--%>
-<%--             <br><br>--%>
-<%--             <label name="dob"><b>Date of Birth:&nbsp; </b></label>--%>
-<%--             <input name="dob" type="text" class="datepicker" onfocus="(this.type = 'date')"required autocomplete="off" />--%>
-<%--             <br><br>--%>
-<%--              <label class="address" name="address"><b>Address:&nbsp;</b></label>--%>
-<%--              <textarea class="address" rows="4" cols="45" name="address" required autocomplete="off" maxlength="200"></textarea>--%>
-<%--                <br>--%>
-<%--                      <br>--%>
-<%--                       <label name="email"><b>Email Id:&nbsp;</b></label>--%>
-<%--             <input type="email" name="email" required autocomplete="off" />--%>
-<%--                <br>--%>
-<%--                      <br>--%>
-<%--                       <label name="password"><b>Password:&nbsp;</b></label>--%>
-<%--             <input type="password" name="password" required autocomplete="off" />--%>
-<%--                <br>--%>
-<%--                      <br>--%>
-<%--                       <label name="conpassword"><b>Confirm Password:&nbsp;</b></label>--%>
-<%--             <input type="password" name="conpassword" required autocomplete="off" />--%>
-<%--                <br>--%>
-<%--                      <br>--%>
-<%--                      <div class="buttons">--%>
-<%--                      <input class="submit"style="color:white;background-color: #0a2f35; border-radius: 10px" type="submit" value="Create Account">--%>
-<%--                      </div>--%>
-<%--            </fieldset>--%>
-<%--        </form></div>--%>
 
 <section class=" gradient-custom">
     <div class="container py-5 h-100">
@@ -204,13 +165,15 @@
                             <div class="row">
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
-                                        <input type="text" name="fname" id="fname" class="form-control form-control-lg" />
+                                        <input type="text" name="fname" id="fname"
+                                               class="form-control form-control-lg"/>
                                         <label class="form-label" for="fname">First Name</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
-                                        <input type="text" name="lname" id="lname" class="form-control form-control-lg" />
+                                        <input type="text" name="lname" id="lname"
+                                               class="form-control form-control-lg"/>
                                         <label class="form-label" for="lname">Last Name</label>
                                     </div>
 
@@ -219,15 +182,17 @@
                             <div class="row">
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
-                                        <input type="text" class="form-control form-control-lg"  id="aadhar" name="aadhar" required autocomplete="off" />
-                                        <label  class="form-label" for="aadhar">Aadhar Number</label>
+                                        <input type="text" class="form-control form-control-lg" id="aadhar"
+                                               name="aadhar" required autocomplete="off"/>
+                                        <label class="form-label" for="aadhar">Aadhar Number</label>
 
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
-                                        <input type="text" class="form-control form-control-lg"  id="contact" name="mobile" required autocomplete="off" />
-                                        <label  class="form-label" for="contact">Contact Number</label>
+                                        <input type="text" class="form-control form-control-lg" id="contact"
+                                               name="mobile" required autocomplete="off"/>
+                                        <label class="form-label" for="contact">Contact Number</label>
                                     </div>
 
                                 </div>
@@ -235,8 +200,9 @@
                             <div class="row">
                                 <div class="col-md-12 mb-4">
                                     <div class="form-outline">
-                                        <label class="form-label" for="address" >Address</label>
-                                        <textarea class="form-control form-control-lg address-textarea"  id="address" name="address" required autocomplete="off" maxlength="200"></textarea>
+                                        <label class="form-label" for="address">Address</label>
+                                        <textarea class="form-control form-control-lg address-textarea" id="address"
+                                                  name="address" required autocomplete="off" maxlength="200"></textarea>
                                     </div>
                                 </div>
 
@@ -269,6 +235,7 @@
                                                 name="inlineRadioOptions"
                                                 id="femaleGender"
                                                 value="Female"
+                                                checked
                                         />
                                         <label class="form-check-label" for="femaleGender">Female</label>
                                     </div>
@@ -302,7 +269,8 @@
                                 <div class="col-md-6 mb-4 pb-2">
 
                                     <div class="form-outline">
-                                        <input type="password" id="password" name="password" class="form-control form-control-lg" />
+                                        <input type="password" id="password" name="password"
+                                               class="form-control form-control-lg"/>
                                         <label class="form-label" for="password">Password</label>
                                     </div>
 
@@ -310,7 +278,8 @@
                                 <div class="col-md-6 mb-4 pb-2">
 
                                     <div class="form-outline">
-                                        <input type="password" id="conpassword" name="conpassword" class="form-control form-control-lg" />
+                                        <input type="password" id="conpassword" name="conpassword"
+                                               class="form-control form-control-lg"/>
                                         <label class="form-label" for="conpassword">Confirm Password</label>
                                     </div>
 
@@ -319,7 +288,7 @@
 
 
                             <div class="mt-4 pt-2">
-                                <input class="btn btn-primary btn-lg" type="submit" value="Submit" />
+                                <input class="btn btn-primary btn-lg" type="submit" value="Submit"/>
                             </div>
 
                         </form>

@@ -312,7 +312,7 @@
                                 </div>
                             </div>
 
-
+                            <input type="hidden" id="accno" name="accno" value=<%=get_accno%>>
                             <div class="mt-4 pt-2">
                                 <input class="btn btn-primary btn-lg" type="submit" value="Edit"/>
                             </div>
