@@ -117,6 +117,8 @@
 <jsp:forward page="index.html"/>
 <%}%>
 
+
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid ">
         <a class="navbar-brand color-me navsizebar" href="#">Hindustan Bank</a>

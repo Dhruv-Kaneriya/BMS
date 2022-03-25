@@ -5,13 +5,13 @@
 --%>
 <%@page import="java.sql.*"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.Date"%>"
+<%@page import="java.util.Date"%>
 
 <%@page import="java.io.PrintWriter"%>
 
 <%@page import="java.text.DateFormat"%>
 <%@page import="java.util.Calendar"%>
-<%@page import="com.example.testdelete.DatabaseConnection"%>;
+<%@page import="com.example.testdelete.DatabaseConnection"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -76,11 +76,21 @@
             pstmt.setString(9,gender);
             pstmt.executeQuery();
 
-            out.println("<script type=\"text/javascript\">");
-            out.println("alert('Account Successfully Created');");
-            out.println("location='dashboard.jsp';");
-            out.println("</script>");
+            pstmt=conn.prepareStatement("Insert into BALANCE (accno,balance) values(?,?)");
+            pstmt.setString(1,accno);
+            pstmt.setInt(2,0);
+            pstmt.executeQuery();
+            String str="Account Created Successfully!\\nGenerated Account Number is: ";
+            String mes=str.concat(accno);
+            %>
 
+           <script>
+
+                   alert("<%=mes%>");
+               window.location.href = "http://localhost:8080/Bank/dashboard.jsp";
+            </script>
+
+<%
         }
         conn.close();
     } catch (Exception e) {
