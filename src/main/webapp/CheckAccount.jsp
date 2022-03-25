@@ -1,14 +1,19 @@
-<%-- 
-    Document   : dashboard
-    Created on : 22 Mar, 2022, 4:04:30 PM
-    Author     : Dhruv
+<%--
+  Created by IntelliJ IDEA.
+  User: Dhruv
+  Date: 24-03-2022
+  Time: 19:27
+  To change this template use File | Settings | File Templates.
 --%>
+
+<%@page import="java.sql.*" %>
+<%@ page import="com.example.testdelete.DatabaseConnection" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Dashboard</title>
+    <title>Edit Account Details</title>
     <link rel="stylesheet" href="dashboard.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -105,9 +110,9 @@
             alert(msg);
         }
     </script>
-
 </head>
 <body>
+
 <%
 
     String sessionid = (String) session.getAttribute("id");
@@ -115,8 +120,21 @@
     if (sessionid == null || sessionid.equals("")) {
 %>
 <jsp:forward page="index.html"/>
-<%}%>
+<%
+    }
+    String get_accno = request.getParameter("accinput");
+    try {
 
+        //Step 1. Register the Driver
+        Connection conn = DatabaseConnection.initializeDatabase();
+
+        //Step 3. Create Statement
+        PreparedStatement pstmt = conn.prepareStatement("Select * from CUSTOMERS where accno=?");
+        pstmt.setString(1, get_accno);
+        ResultSet rs = pstmt.executeQuery();
+
+        if (rs.next()) {
+%>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid ">
@@ -128,10 +146,11 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-fill w-100">
                 <li class="nav-item">
-                    <a class="nav-link active navsize" aria-current="page" href="dashboard.jsp">Home</a>
+                    <a class="nav-link color-me navsize" href="dashboard.jsp">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link color-me navsize" href="EditAccountDetails.jsp">Edit Account Details</a>
+                    <a class="nav-link active  navsize" aria-current="page" href="EditAccountDetails.jsp">Edit Account
+                        Details</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link color-me navsize" href="deposit.jsp">Deposit</a>
@@ -154,28 +173,27 @@
     </div>
 </nav>
 
-
 <section class=" gradient-custom">
     <div class="container py-5 h-100">
         <div class="row justify-content-center align-items-center h-100">
             <div class="col-12 col-lg-9 col-xl-7">
                 <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
                     <div class="card-body p-4 p-md-5">
-                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
-                        <form name="form" action="create_account.jsp" onsubmit="return validateform(this)">
+                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Edit Account Details</h3>
+                        <form name="form" action="UpdateAccountDetails.jsp" onsubmit="return validateform(this)">
 
                             <div class="row">
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
                                         <input type="text" name="fname" id="fname"
-                                               class="form-control form-control-lg"/>
+                                               value=<%=rs.getString(2)%> class="form-control form-control-lg" />
                                         <label class="form-label" for="fname">First Name</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
                                         <input type="text" name="lname" id="lname"
-                                               class="form-control form-control-lg"/>
+                                               value=<%=rs.getString(3)%> class="form-control form-control-lg" />
                                         <label class="form-label" for="lname">Last Name</label>
                                     </div>
 
@@ -185,7 +203,7 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
                                         <input type="text" class="form-control form-control-lg" id="aadhar"
-                                               name="aadhar" required autocomplete="off"/>
+                                               name="aadhar" value=<%=rs.getString(4)%> required autocomplete="off"/>
                                         <label class="form-label" for="aadhar">Aadhar Number</label>
 
                                     </div>
@@ -193,7 +211,7 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
                                         <input type="text" class="form-control form-control-lg" id="contact"
-                                               name="mobile" required autocomplete="off"/>
+                                               name="mobile" value=<%=rs.getString(5)%> required autocomplete="off"/>
                                         <label class="form-label" for="contact">Contact Number</label>
                                     </div>
 
@@ -204,7 +222,8 @@
                                     <div class="form-outline">
                                         <label class="form-label" for="address">Address</label>
                                         <textarea class="form-control form-control-lg address-textarea" id="address"
-                                                  name="address" required autocomplete="off" maxlength="200"></textarea>
+                                                  name="address" required autocomplete="off"
+                                                  maxlength="200"><%=rs.getString(9)%></textarea>
                                     </div>
                                 </div>
 
@@ -221,6 +240,7 @@
                                                 class="form-control form-control-lg"
                                                 id="birthdayDate"
                                                 name="dob"
+                                                value=<%=rs.getDate(6)%>
                                         />
                                         <label for="birthdayDate" class="form-label">Birthday</label>
                                     </div>
@@ -237,7 +257,7 @@
                                                 name="inlineRadioOptions"
                                                 id="femaleGender"
                                                 value="Female"
-                                                checked
+                                                <% if (rs.getString(10).equals("Female")) {%> checked <%}%>
                                         />
                                         <label class="form-check-label" for="femaleGender">Female</label>
                                     </div>
@@ -249,6 +269,8 @@
                                                 name="inlineRadioOptions"
                                                 id="maleGender"
                                                 value="Male"
+                                                <% if (rs.getString(10).equals("Male")) {%> checked <%}%>
+
                                         />
                                         <label class="form-check-label" for="maleGender">Male</label>
                                     </div>
@@ -260,6 +282,8 @@
                                                 name="inlineRadioOptions"
                                                 id="otherGender"
                                                 value="Other"
+                                                <% if (rs.getString(10).equals("Other")) {%> checked <%}%>
+
                                         />
                                         <label class="form-check-label" for="otherGender">Other</label>
                                     </div>
@@ -288,9 +312,9 @@
                                 </div>
                             </div>
 
-
+                            <input type="hidden" id="accno" name="accno" value=<%=get_accno%>>
                             <div class="mt-4 pt-2">
-                                <input class="btn btn-primary btn-lg" type="submit" value="Submit"/>
+                                <input class="btn btn-primary btn-lg" type="submit" value="Edit"/>
                             </div>
 
                         </form>
@@ -300,6 +324,17 @@
         </div>
     </div>
 </section>
+<%
+        } else {
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('No Account Found');");
+            out.println("location='EditAccountDetails.jsp';");
+            out.println("</script>");
+        }
+    } catch (Exception e) {
+        out.println(e);
+    }
+%>
 
 </body>
 </html>
