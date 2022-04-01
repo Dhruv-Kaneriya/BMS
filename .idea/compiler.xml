@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="TESTDELETE" />
+        <module name="BANKING MANAGEMENT SYSTEM" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="TESTDELETE" target="1.8" />
+      <module name="BANKING MANAGEMENT SYSTEM" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -11,9 +11,9 @@ public class DatabaseConnection {
 	{
 		// Initialize all the information regarding
 		// Database Connection
-           
 
-                    //Step 2. Create Connection
+
+        //Step 2. Create Connection
    		String dbDriver = "oracle.jdbc.driver.OracleDriver";
 		String dbURL = "jdbc:oracle:thin:@119.160.199.94:1521:mefgi";
 

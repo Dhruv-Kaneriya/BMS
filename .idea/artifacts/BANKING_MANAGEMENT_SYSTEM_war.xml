@@ -1,14 +1,14 @@
 <component name="ArtifactManager">
-  <artifact type="war" name="TESTDELETE:war">
+  <artifact type="war" name="BANKING MANAGEMENT SYSTEM:war">
     <output-path>$PROJECT_DIR$/target</output-path>
     <properties id="maven-jee-properties">
       <options>
-        <module>TESTDELETE</module>
+        <module>BANKING MANAGEMENT SYSTEM</module>
         <packaging>war</packaging>
       </options>
     </properties>
     <root id="archive" name="TESTDELETE-1.0-SNAPSHOT.war">
-      <element id="artifact" artifact-name="BANKING MANAGEMENET SYSTEM:war exploded" />
+      <element id="artifact" artifact-name="BANKING MANAGEMENT SYSTEM:war exploded" />
     </root>
   </artifact>
 </component>
