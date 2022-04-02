@@ -67,6 +67,7 @@
   }
 
 </style>
+
 </head>
 <body>
 <%
@@ -91,8 +92,8 @@
             <script src="https://kit.fontawesome.com/d97b87339f.js" crossorigin="anonymous"></script>
 
             <div class="search-box">
-              <form style="display: flex" action="CheckAccount.jsp" method="post">
-              <input class="search-input" name="accinput" type="text" placeholder="Enter Account Number" required>
+              <form style="display: flex" name="form" action="CheckAccount.jsp" method="post">
+              <input class="search-input" name="accinput" pattern="[0-9]{14,14}"  title="14-digit Account Number" type="text" placeholder="Enter Account Number" required>
               <button type="submit"class="search-btn"><i class="fas fa-search"></i></button>
               </form>
             </div>
@@ -104,4 +105,6 @@
 </section>
 
 </body>
+
+
 </html>

@@ -9,11 +9,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@page import="java.util.UUID" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
 
 <html>
 <head>
-    <title>Deposit Money</title>
+    <title>Withdraw Money</title>
 </head>
 <body>
 <%
@@ -24,37 +25,70 @@
     try {
         Connection conn = DatabaseConnection.initializeDatabase();
         conn.setAutoCommit(false);
-
-        PreparedStatement pstmt=conn.prepareStatement("UPDATE BALANCE SET BALANCE=BALANCE-? WHERE ACCNO=?");
-
-        pstmt.setFloat(1, Float.parseFloat(amount));
-        pstmt.setString(2,accountno);
-        int status = pstmt.executeUpdate();
-        pstmt = conn.prepareStatement("Insert into TRANSACTIONS (TRANSACTION_FROM,TRANSACTION_TYPE,TRANSACTION_TO,TRANSACTION_ID,TRANSACTION_AMOUNT) values(?,?,?,?,?)");
+        PreparedStatement pstmt=conn.prepareStatement("Select * from BALANCE where accno=?");
         pstmt.setString(1,accountno);
-        pstmt.setString(2,"Cash");
+        ResultSet rs = pstmt.executeQuery();
+        if(rs.next()){
+            if(rs.getFloat(1)>=Float.parseFloat(amount))
+            {
+                pstmt=conn.prepareStatement("UPDATE BALANCE SET BALANCE=BALANCE-? WHERE ACCNO=?");
 
-        pstmt.setString(3,"self");
+                pstmt.setFloat(1, Float.parseFloat(amount));
+                pstmt.setString(2,accountno);
+                int status = pstmt.executeUpdate();
+                pstmt = conn.prepareStatement("Insert into TRANSACTIONS (TRANSACTION_FROM,TRANSACTION_TYPE,TRANSACTION_TO,TRANSACTION_ID,TRANSACTION_AMOUNT) values(?,?,?,?,?)");
+                pstmt.setString(1,accountno);
+                pstmt.setString(2,"Cash");
 
-        String rand_int1 = UUID.randomUUID().toString();
-        pstmt.setString(4, (rand_int1));
-        pstmt.setFloat(5,Float.parseFloat(amount));
-        pstmt.executeQuery();
+                pstmt.setString(3,"self");
 
-        if(status == 1){
-            conn.commit();
+                String rand_int1 = UUID.randomUUID().toString();
+                pstmt.setString(4, (rand_int1));
+                pstmt.setFloat(5,Float.parseFloat(amount));
+                pstmt.executeQuery();
+
+                if(status == 1){
+                    conn.commit();
+
+
 %>
         <script>
-            alert("money deposited successfully");
-            window.location.href = "http://localhost:8080/Bank/withdraw.jsp";
+            alert("Money Successfully Withdrew");
+            window.location.href = "http://localhost:8080/BANKING_MANAGEMENT_SYSTEM_war_exploded/withdraw.jsp";
 
         </script>
 <%
-        }else{
-            conn.rollback();
+    }else {
+                conn.rollback();
+                %>
+<script>
+    alert("An Error Occurred! Try again later");
+    window.location.href = "http://localhost:8080/BANKING_MANAGEMENT_SYSTEM_war_exploded/withdraw.jsp";
+
+</script>
+                <%
+                }
+
+            }else{
+            %>
+             <script>
+                    alert("Insufficient Balance");
+            window.location.href = "http://localhost:8080/BANKING_MANAGEMENT_SYSTEM_war_exploded/withdraw.jsp";
+
+        </script>
+                    <%
         }
+        }
+        else{
 
+            %>
+<script>
+    alert("No Account Found");
+    window.location.href = "http://localhost:8080/BANKING_MANAGEMENT_SYSTEM_war_exploded/withdraw.jsp";
 
+</script>
+<%
+        }
     } catch (SQLException | ClassNotFoundException e) {
         e.printStackTrace();
     }

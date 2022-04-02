@@ -54,15 +54,15 @@
         //Step 4. Execute Query
         if(aadharcount==0 || account==1){
             //Step 3. Create Statement
-            pstmt = conn.prepareStatement("Update CUSTOMERS set firstname=?, lastname=?, aadhar=?, mobile=?, dob=?, password=?,address=?,gender=? where accno=" + cus_accno);
+            pstmt = conn.prepareStatement("Update CUSTOMERS set firstname=?, lastname=?, aadhar=?, mobile=?, dob=?, address=?,gender=? where accno=" + cus_accno);
             pstmt.setString(1, fname);
             pstmt.setString(2, lname);
             pstmt.setString(3, cus_aadhar);
             pstmt.setString(4, mobile);
             pstmt.setDate(5, sqlDate);
-            pstmt.setString(6, password);
-            pstmt.setString(7, address);
-            pstmt.setString(8, gender);
+
+            pstmt.setString(6, address);
+            pstmt.setString(7, gender);
             pstmt.executeUpdate();
             out.println("<script type=\"text/javascript\">");
             out.println("alert('Details Successfully Updated');");

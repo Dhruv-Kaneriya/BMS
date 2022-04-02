@@ -32,8 +32,7 @@
             var lname = form.lname.value;
             var aadhar = form.aadhar.value;
             var mobile = form.mobile.value;
-            var password = form.password.value;
-            var conpassword = form.conpassword.value;
+
             var address = form.address.value;
             var errors = [];
             if (!ck_fname.test(fname)) {
@@ -51,15 +50,7 @@
 
                 errors[errors.length] = "Mobile number must be of 10 digits!";
             }
-            if (!ck_password.test(password)) {
 
-                errors[errors.length] = "Password must be atleast of 8 characters";
-            }
-
-            if (password !== conpassword) {
-                errors[errors.length] = "Confirm Password should be same as Password";
-
-            }
             if (!ck_address.test(address)) {
                 errors[errors.length] = "Address should be of atleast size 3 and may contain special symbols out of (\s,.'-)";
             }
@@ -133,16 +124,18 @@
                             <div class="row">
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
-                                        <input type="text" name="fname" id="fname"
-                                               class="form-control form-control-lg"/>
                                         <label class="form-label" for="fname">First Name</label>
+                                        <input type="text" name="fname" id="fname"
+                                               class="form-control form-control-lg" required/>
+
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
-                                        <input type="text" name="lname" id="lname"
-                                               class="form-control form-control-lg"/>
                                         <label class="form-label" for="lname">Last Name</label>
+                                        <input type="text" name="lname" id="lname"
+                                               class="form-control form-control-lg" required/>
+
                                     </div>
 
                                 </div>
@@ -150,17 +143,19 @@
                             <div class="row">
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
+                                        <label class="form-label" for="aadhar">Aadhar Number</label>
                                         <input type="text" class="form-control form-control-lg" id="aadhar"
                                                name="aadhar" required autocomplete="off"/>
-                                        <label class="form-label" for="aadhar">Aadhar Number</label>
+
 
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
+                                        <label class="form-label" for="contact">Contact Number</label>
                                         <input type="text" class="form-control form-control-lg" id="contact"
                                                name="mobile" required autocomplete="off"/>
-                                        <label class="form-label" for="contact">Contact Number</label>
+
                                     </div>
 
                                 </div>
@@ -233,26 +228,7 @@
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-6 mb-4 pb-2">
 
-                                    <div class="form-outline">
-                                        <input type="password" id="password" name="password"
-                                               class="form-control form-control-lg"/>
-                                        <label class="form-label" for="password">Password</label>
-                                    </div>
-
-                                </div>
-                                <div class="col-md-6 mb-4 pb-2">
-
-                                    <div class="form-outline">
-                                        <input type="password" id="conpassword" name="conpassword"
-                                               class="form-control form-control-lg"/>
-                                        <label class="form-label" for="conpassword">Confirm Password</label>
-                                    </div>
-
-                                </div>
-                            </div>
 
 
                             <div class="mt-4 pt-2">
