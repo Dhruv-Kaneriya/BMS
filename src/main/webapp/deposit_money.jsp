@@ -49,7 +49,7 @@
 %>
         <script>
             alert("Money Deposited Successfully");
-            window.location.href = "http://localhost:8080/BANKING_MANAGEMENT_SYSTEM_war_exploded/deposit.jsp";
+            window.location.href = "http://localhost:8080/Bank/deposit.jsp";
 
         </script>
 <%
@@ -58,7 +58,7 @@
 
             %>
 <script>alert("An Error Occurred while depositing the amount");
-window.location.href = "http://localhost:8080/BANKING_MANAGEMENT_SYSTEM_war_exploded/deposit.jsp";</script>
+window.location.href = "http://localhost:8080/Bank/deposit.jsp";</script>
             <%
         }
         }else
@@ -66,7 +66,7 @@ window.location.href = "http://localhost:8080/BANKING_MANAGEMENT_SYSTEM_war_expl
             %>
             <script>
                     alert("No Account Found!");
-                    window.location.href = "http://localhost:8080/BANKING_MANAGEMENT_SYSTEM_war_exploded/deposit.jsp";</script>
+                    window.location.href = "http://localhost:8080/Bank/deposit.jsp";</script>
 
        <%
         }

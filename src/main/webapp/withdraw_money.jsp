@@ -54,7 +54,7 @@
 %>
         <script>
             alert("Money Successfully Withdrew");
-            window.location.href = "http://localhost:8080/BANKING_MANAGEMENT_SYSTEM_war_exploded/withdraw.jsp";
+            window.location.href = "http://localhost:8080/Bank/withdraw.jsp";
 
         </script>
 <%
@@ -63,7 +63,7 @@
                 %>
 <script>
     alert("An Error Occurred! Try again later");
-    window.location.href = "http://localhost:8080/BANKING_MANAGEMENT_SYSTEM_war_exploded/withdraw.jsp";
+    window.location.href = "http://localhost:8080/Bank/withdraw.jsp";
 
 </script>
                 <%
@@ -73,7 +73,7 @@
             %>
              <script>
                     alert("Insufficient Balance");
-            window.location.href = "http://localhost:8080/BANKING_MANAGEMENT_SYSTEM_war_exploded/withdraw.jsp";
+            window.location.href = "http://localhost:8080/Bank/withdraw.jsp";
 
         </script>
                     <%
@@ -84,7 +84,7 @@
             %>
 <script>
     alert("No Account Found");
-    window.location.href = "http://localhost:8080/BANKING_MANAGEMENT_SYSTEM_war_exploded/withdraw.jsp";
+    window.location.href = "http://localhost:8080/Bank/withdraw.jsp";
 
 </script>
 <%
