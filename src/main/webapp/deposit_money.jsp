@@ -11,6 +11,12 @@
 <%@page import="java.util.UUID" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    String sessionid=(String)session.getAttribute("id");
+    if(sessionid==null||sessionid.equals("")){
+%>
+<jsp:forward page="index.html"/>
+<%}%>
 
 <html>
 <head>
