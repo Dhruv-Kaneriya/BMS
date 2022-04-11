@@ -166,11 +166,19 @@
         success: function(data)
         {
           const dataArray = data.split(",");
-          let firstName = dataArray[0];
-          let balance = dataArray[1];
-          display_block.style.display = "block";
-          first_name.textContent = firstName;
-          balance_name.textContent = balance;
+          let firstName = dataArray[0].trim();
+          let balance = dataArray[1].trim();
+console.log(firstName);
+           if(firstName=="0")
+           {
+             display_block.style.display = "none";
+             alert("No Account Found!");
+           }
+           else {
+            display_block.style.display = "block";
+            first_name.textContent = firstName;
+            balance_name.textContent = balance;
+           }
         }
         });
 

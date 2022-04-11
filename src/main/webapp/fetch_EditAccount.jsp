@@ -16,7 +16,7 @@
 
     try {
 
-        String firstName;
+        String Name;
         String balance = null;
 
         //Step 1. Register the Driver
@@ -29,7 +29,7 @@
         ResultSet rs = pstmt.executeQuery();
 
         if (rs.next()) {
-            firstName = rs.getString(2);
+            Name = rs.getString(2)+" "+rs.getString(3);
             pstmt = conn.prepareStatement("Select * from BALANCE where accno=?");
             pstmt.setString(1, acc);
 
@@ -37,13 +37,14 @@
             if(rs2.next()){
                 balance = rs2.getString(1);
             }
-
-            out.print(firstName + ',' + balance);
-
-
-
-
-        }}catch (Exception e){
+            out.print(Name + ',' + balance);
+        }
+       else{
+            Name="0";
+            balance="0";
+            out.print(Name + ',' + balance);
+        }
+    }catch (Exception e){
         out.print(e);
     }
 %>
