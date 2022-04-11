@@ -26,7 +26,6 @@
     String lname = request.getParameter("lname");
     String aadhar = request.getParameter("aadhar");
     String mobile = request.getParameter("mobile");
-    String password = request.getParameter("password");
     String dob = request.getParameter("dob");
     String address=request.getParameter("address");
     String gender= request.getParameter("inlineRadioOptions");
@@ -64,16 +63,16 @@
         }
         else
         {
-            pstmt=conn.prepareStatement("Insert into CUSTOMERS (accno,firstname,lastname,aadhar,mobile,dob,password,address,gender) values(?,?,?,?,?,?,?,?,?)");
+            pstmt=conn.prepareStatement("Insert into CUSTOMERS (accno,firstname,lastname,aadhar,mobile,dob,address,gender) values(?,?,?,?,?,?,?,?)");
             pstmt.setString(1,accno);
             pstmt.setString(2,fname);
             pstmt.setString(3,lname);
             pstmt.setString(4,aadhar);
             pstmt.setString(5,mobile);
             pstmt.setDate(6,sqlDate);
-            pstmt.setString(7,password);
-            pstmt.setString(8,address);
-            pstmt.setString(9,gender);
+
+            pstmt.setString(7,address);
+            pstmt.setString(8,gender);
             pstmt.executeQuery();
 
             pstmt=conn.prepareStatement("Insert into BALANCE (accno,balance) values(?,?)");

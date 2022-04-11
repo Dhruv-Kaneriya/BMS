@@ -30,13 +30,13 @@
                     <a class="nav-link color-me<% if(uri.equals("/Bank/withdraw.jsp")){ %> active <% } %> navsize" href="withdraw.jsp">Withdraw</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link color-me <% if(uri.equals("/Bank/#.jsp")){ %> active <% } %> navsize" href="#">View Transactions</a>
+                    <a class="nav-link color-me <% if(uri.equals("/Bank/Transaction.jsp")){ %> active <% } %> navsize" href="Transaction.jsp">View Transactions</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link color-me <% if(uri.equals("/Bank/#.jsp")){ %> active <% } %> navsize" href="#">Transfer Amount</a>
+                    <a class="nav-link color-me <% if(uri.equals("/Bank/transfer.jsp")){ %> active <% } %> navsize" href="transfer.jsp">Transfer Amount</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link color-me <% if(uri.equals("/Bank/#.jsp")){ %> active <% } %> navsize" href="logout.jsp">Logout</a>
+                    <a class="nav-link color-me <% if(uri.equals("/Bank/logout.jsp")){ %> active <% } %> navsize" href="logout.jsp">Logout</a>
                 </li>
             </ul>
         </div>

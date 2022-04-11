@@ -20,7 +20,14 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
+    <%
 
+        String sessionid = (String) session.getAttribute("id");
+
+        if (sessionid == null || sessionid.equals("")) {
+    %>
+    <jsp:forward page="index.html"/>
+    <%}%>
 
     <script>
         var ck_fname = /^[a-zA-Z]{3,128}$/;
@@ -37,8 +44,6 @@
             var lname = form.lname.value;
             var aadhar = form.aadhar.value;
             var mobile = form.mobile.value;
-            var password = form.password.value;
-            var conpassword = form.conpassword.value;
             var address = form.address.value;
             var errors = [];
             if (!ck_fname.test(fname)) {
@@ -55,15 +60,6 @@
             if (!ck_mobile.test(mobile)) {
 
                 errors[errors.length] = "Mobile number must be of 10 digits!";
-            }
-            if (!ck_password.test(password)) {
-
-                errors[errors.length] = "Password must be atleast of 8 characters";
-            }
-
-            if (password !== conpassword) {
-                errors[errors.length] = "Confirm Password should be same as Password";
-
             }
             if (!ck_address.test(address)) {
                 errors[errors.length] = "Address should be of atleast size 3 and may contain special symbols out of (\s,.'-)";
@@ -150,16 +146,18 @@
                             <div class="row">
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
+                                        <label class="form-label" for="fname">First Name</label>
                                         <input type="text" name="fname" id="fname"
                                                value=<%=rs.getString(2)%> class="form-control form-control-lg" />
-                                        <label class="form-label" for="fname">First Name</label>
+
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
+                                        <label class="form-label" for="lname">Last Name</label>
                                         <input type="text" name="lname" id="lname"
                                                value=<%=rs.getString(3)%> class="form-control form-control-lg" />
-                                        <label class="form-label" for="lname">Last Name</label>
+
                                     </div>
 
                                 </div>
@@ -167,17 +165,19 @@
                             <div class="row">
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
+                                        <label class="form-label" for="aadhar">Aadhar Number</label>
                                         <input type="text" class="form-control form-control-lg" id="aadhar"
                                                name="aadhar" value=<%=rs.getString(4)%> required autocomplete="off"/>
-                                        <label class="form-label" for="aadhar">Aadhar Number</label>
+
 
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
+                                        <label class="form-label" for="contact">Contact Number</label>
                                         <input type="text" class="form-control form-control-lg" id="contact"
                                                name="mobile" value=<%=rs.getString(5)%> required autocomplete="off"/>
-                                        <label class="form-label" for="contact">Contact Number</label>
+
                                     </div>
 
                                 </div>
@@ -199,6 +199,7 @@
                                 <div class="col-md-6 mb-4 d-flex align-items-center">
 
                                     <div class="form-outline datepicker w-100">
+                                        <label for="birthdayDate" class="form-label">Birthday</label>
                                         <input
                                                 onfocus="(this.type = 'date')" required autocomplete="off"
                                                 type="text"
@@ -207,7 +208,7 @@
                                                 name="dob"
                                                 value=<%=rs.getDate(6)%>
                                         />
-                                        <label for="birthdayDate" class="form-label">Birthday</label>
+
                                     </div>
 
                                 </div>
@@ -222,7 +223,7 @@
                                                 name="inlineRadioOptions"
                                                 id="femaleGender"
                                                 value="Female"
-                                                <% if (rs.getString(10).equals("Female")) {%> checked <%}%>
+                                                <% if (rs.getString(9).equals("Female")) {%> checked <%}%>
                                         />
                                         <label class="form-check-label" for="femaleGender">Female</label>
                                     </div>
@@ -234,7 +235,7 @@
                                                 name="inlineRadioOptions"
                                                 id="maleGender"
                                                 value="Male"
-                                                <% if (rs.getString(10).equals("Male")) {%> checked <%}%>
+                                                <% if (rs.getString(9).equals("Male")) {%> checked <%}%>
 
                                         />
                                         <label class="form-check-label" for="maleGender">Male</label>
@@ -247,7 +248,7 @@
                                                 name="inlineRadioOptions"
                                                 id="otherGender"
                                                 value="Other"
-                                                <% if (rs.getString(10).equals("Other")) {%> checked <%}%>
+                                                <% if (rs.getString(9).equals("Other")) {%> checked <%}%>
 
                                         />
                                         <label class="form-check-label" for="otherGender">Other</label>
@@ -256,26 +257,7 @@
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-6 mb-4 pb-2">
 
-                                    <div class="form-outline">
-                                        <input type="password" id="password" name="password"
-                                               class="form-control form-control-lg"/>
-                                        <label class="form-label" for="password">Password</label>
-                                    </div>
-
-                                </div>
-                                <div class="col-md-6 mb-4 pb-2">
-
-                                    <div class="form-outline">
-                                        <input type="password" id="conpassword" name="conpassword"
-                                               class="form-control form-control-lg"/>
-                                        <label class="form-label" for="conpassword">Confirm Password</label>
-                                    </div>
-
-                                </div>
-                            </div>
 
                             <input type="hidden" id="accno" name="accno" value=<%=get_accno%>>
                             <div class="mt-4 pt-2">

@@ -9,7 +9,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@page import="java.util.UUID" %>
+<%@ page import="java.sql.ResultSet" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    String sessionid=(String)session.getAttribute("id");
+    if(sessionid==null||sessionid.equals("")){
+%>
+<jsp:forward page="index.html"/>
+<%}%>
 
 <html>
 <head>
@@ -24,7 +31,11 @@
     try {
         Connection conn = DatabaseConnection.initializeDatabase();
         conn.setAutoCommit(false);
-        PreparedStatement pstm=conn.prepareStatement("UPDATE BALANCE SET BALANCE=BALANCE+? WHERE ACCNO=?");
+        PreparedStatement pstm=conn.prepareStatement("Select * from CUSTOMERS where accno=?");
+        pstm.setString(1,accountno);
+        ResultSet rs = pstm.executeQuery();
+        if(rs.next()){
+        pstm=conn.prepareStatement("UPDATE BALANCE SET BALANCE=BALANCE+? WHERE ACCNO=?");
 
         pstm.setFloat(1, Float.parseFloat(amount));
         pstm.setString(2,accountno);
@@ -38,19 +49,33 @@
         pstm.setFloat(5,Float.parseFloat(amount));
         pstm.executeQuery();
 
-        if(status == 1){
+        if(status == 1) {
             conn.commit();
+
 %>
         <script>
-            alert("money deposited successfully");
+            alert("Money Deposited Successfully");
             window.location.href = "http://localhost:8080/Bank/deposit.jsp";
 
         </script>
 <%
         }else{
             conn.rollback();
-        }
 
+            %>
+                <script>alert("An Error Occurred while depositing the amount");
+                window.location.href = "http://localhost:8080/Bank/deposit.jsp";</script>
+            <%
+        }
+        }else
+        {
+            %>
+            <script>
+                    alert("No Account Found!");
+                    window.location.href = "http://localhost:8080/Bank/deposit.jsp";</script>
+
+       <%
+        }
 
     } catch (SQLException | ClassNotFoundException e) {
         e.printStackTrace();

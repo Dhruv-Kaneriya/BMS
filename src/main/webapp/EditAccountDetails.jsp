@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="dashboard.css">
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <style>
   .search-box {
@@ -67,6 +68,7 @@
   }
 
 </style>
+
 </head>
 <body>
 <%
@@ -80,7 +82,7 @@
 
 <jsp:include page="navbar.jsp" />
 
-<section class=" gradient-custom">
+<section class="gradient-custom">
   <div class="container py-5 h-100">
     <div class="row justify-content-center align-items-center h-100">
       <div class="col-12 col-lg-9 col-xl-7">
@@ -91,17 +93,99 @@
             <script src="https://kit.fontawesome.com/d97b87339f.js" crossorigin="anonymous"></script>
 
             <div class="search-box">
-              <form style="display: flex" action="CheckAccount.jsp" method="post">
-              <input class="search-input" name="accinput" type="text" placeholder="Enter Account Number" required>
-              <button type="submit"class="search-btn"><i class="fas fa-search"></i></button>
+              <form style="display: flex" id="idForm" name="form"  method="post">
+              <input class="search-input" id="search_btn" name="accinput" pattern="[0-9]{14,14}"  title="14-digit Account Number" type="text" placeholder="Enter Account Number" required>
+              <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
               </form>
             </div>
           </div>
+
+          <div id="display_block"  class="p-4 p-md-5" style="display: none; ">
+              <div style="margin: auto" class="row align-items-center">
+            <div style="display: flex;align-items: center;justify-content: center"> <p>Name : </p> <p id="first_name"></p></div>
+           <div style="display: flex;align-items: center;justify-content: center"><p>Balance Available : </p><p id="balance"></p></div>
+
+            <button class="btn btn-primary m-2" id="edit_btn" > Edit Account </button>
+            <button class="btn btn-danger m-2" id="delete_btn"> Delete Account </button>
+              </div>
+          </div>
         </div>
+
       </div>
     </div>
   </div>
 </section>
+<script>
 
+        $("#edit_btn").click(function (e){
+          let search_btn = document.getElementById("search_btn");
+
+          let acc = search_btn.value;
+
+          window.location.href = "http://localhost:8080/Bank/CheckAccount.jsp?accinput=" + acc;
+
+
+})
+        $("#delete_btn").click(function (e) {
+          let search_btn = document.getElementById("search_btn");
+          let acc = search_btn.value;
+          let display_block = document.getElementById("display_block");
+
+          $.ajax({
+            type: "POST",
+            url: "DeleteAccount.jsp",
+            data: {'accinput': acc},
+            dataType:"text",// serializes the form's elements.
+            success: function (data) {
+
+              //Insert Condition If balance
+              if (typeof data == "string") {
+                if (data.trim() == "success") {
+                  display_block.style.display = "none";
+                  alert("Account Closed Successfully");
+                } else if (data.trim() == "fail") {
+                  alert("Account Contains Money, Kindly Withdraw or Transfer to some other Account!");
+                }
+
+              }
+
+            }
+          });
+        })
+        $("#idForm").submit(function(e) {
+        let first_name = document.getElementById("first_name");
+        let balance_name = document.getElementById("balance");
+        let display_block = document.getElementById("display_block");
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+
+        var form = $(this);
+
+        $.ajax({
+        type: "POST",
+        url: "fetch_EditAccount.jsp",
+        data: form.serialize(), // serializes the form's elements.
+        success: function(data)
+        {
+          const dataArray = data.split(",");
+          let firstName = dataArray[0].trim();
+          let balance = dataArray[1].trim();
+
+           if(firstName=="0")
+           {
+             display_block.style.display = "none";
+             alert("No Account Found!");
+           }
+           else {
+            display_block.style.display = "block";
+            first_name.textContent = firstName;
+            balance_name.textContent = balance;
+           }
+        }
+        });
+
+        });
+</script>
 </body>
+
+
 </html>
