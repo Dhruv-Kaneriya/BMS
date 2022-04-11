@@ -124,7 +124,7 @@
 
 
 })
-        $("#delete_btn").click(function (e){
+        $("#delete_btn").click(function (e) {
           let search_btn = document.getElementById("search_btn");
           let acc = search_btn.value;
           let display_block = document.getElementById("display_block");
@@ -132,25 +132,24 @@
           $.ajax({
             type: "POST",
             url: "DeleteAccount.jsp",
-            data: {'accinput' : acc}, // serializes the form's elements.
-            success: function(data)
-            {
+            data: {'accinput': acc},
+            dataType:"text",// serializes the form's elements.
+            success: function (data) {
+
               //Insert Condition If balance
-              console.log(data);
-              console.log(data.type)
-              const dataArray = data.split(",");
-              let firstName = dataArray[0];
-              console.log(firstName);
-              if(data === 'success'){
-                console.log("hey")
+              if (typeof data == "string") {
+                if (data.trim() == "success") {
+                  display_block.style.display = "none";
+                  alert("Account Closed Successfully");
+                } else if (data.trim() == "fail") {
+                  alert("Account Contains Money, Kindly Withdraw or Transfer to some other Account!");
+                }
 
               }
-              if(data === "success"){
-              display_block.style.display = "none";
-              alert("Account Deletation Success");}
-            }
-          });        })
 
+            }
+          });
+        })
         $("#idForm").submit(function(e) {
         let first_name = document.getElementById("first_name");
         let balance_name = document.getElementById("balance");
@@ -168,7 +167,7 @@
           const dataArray = data.split(",");
           let firstName = dataArray[0].trim();
           let balance = dataArray[1].trim();
-console.log(firstName);
+
            if(firstName=="0")
            {
              display_block.style.display = "none";

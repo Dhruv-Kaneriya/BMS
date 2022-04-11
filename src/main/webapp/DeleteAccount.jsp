@@ -11,20 +11,34 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String acc = request.getParameter("accinput");
-
+    String message;
     try {
         //Step 1. Register the Driver
         Connection conn = DatabaseConnection.initializeDatabase();
-
-        //Step 3. Create Statement
-        PreparedStatement pstmt = conn.prepareStatement("DELETE  FROM BALANCE WHERE accno=?");
+        PreparedStatement pstmt=conn.prepareStatement("Select * from BALANCE where accno=?");
         pstmt.setString(1,acc);
-        ResultSet rs = pstmt.executeQuery();
-        pstmt = conn.prepareStatement("DELETE FROM CUSTOMERS WHERE accno=?");
-        pstmt.setString(1, acc);
-        rs = pstmt.executeQuery();
-        String message = "success";
-        out.print(message);
+        ResultSet rs= pstmt.executeQuery();
+        //Step 3. Create Statement
+
+        if(rs.next()){
+            float num=0f;
+            if(Float.compare(rs.getFloat(1),num)==0) {
+                pstmt=conn.prepareStatement("Delete from BALANCE where accno=?");
+                pstmt.setString(1,acc);
+                pstmt.executeUpdate();
+                pstmt = conn.prepareStatement("DELETE FROM CUSTOMERS WHERE accno=?");
+                pstmt.setString(1, acc);
+                pstmt.executeUpdate();
+               message = "success";
+                out.print(message);
+            }
+            else
+            {
+                message="fail";
+                out.print(message);
+            }
+        }
+
 
        }catch (Exception e){
         out.print(e);
