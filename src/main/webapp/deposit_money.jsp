@@ -63,8 +63,8 @@
             conn.rollback();
 
             %>
-<script>alert("An Error Occurred while depositing the amount");
-window.location.href = "http://localhost:8080/Bank/deposit.jsp";</script>
+                <script>alert("An Error Occurred while depositing the amount");
+                window.location.href = "http://localhost:8080/Bank/deposit.jsp";</script>
             <%
         }
         }else
