@@ -22,6 +22,14 @@
 </head>
 <body>
 <%
+
+    String sessionid = (String) session.getAttribute("id");
+
+    if (sessionid == null || sessionid.equals("")) {
+%>
+<jsp:forward page="index.html"/>
+<%}%>
+<%
     String fname = request.getParameter("fname");
     String lname = request.getParameter("lname");
     String aadhar = request.getParameter("aadhar");

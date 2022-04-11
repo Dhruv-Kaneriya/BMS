@@ -71,14 +71,14 @@
 
 </head>
 <body>
-<%--<%--%>
+<%
 
-<%--  String sessionid=(String)session.getAttribute("id");--%>
+  String sessionid=(String)session.getAttribute("id");
 
-<%--  if(sessionid==null||sessionid.equals("")){--%>
-<%--%>--%>
-<%--<jsp:forward page="index.html"/>--%>
-<%--<%}%>--%>
+  if(sessionid==null||sessionid.equals("")){
+%>
+<jsp:forward page="index.html"/>
+<%}%>
 
 <jsp:include page="navbar.jsp" />
 

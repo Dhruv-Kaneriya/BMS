@@ -12,6 +12,14 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
+
+    String sessionid = (String) session.getAttribute("id");
+
+    if (sessionid == null || sessionid.equals("")) {
+%>
+<jsp:forward page="index.html"/>
+<%}%>
+<%
     String acc = request.getParameter("accinput");
 
     try {

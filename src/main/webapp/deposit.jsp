@@ -28,6 +28,7 @@
 <body>
 <jsp:include page="navbar.jsp"/>
 
+
 <section class=" gradient-custom">
     <div class="container py-5 h-100">
         <div class="row justify-content-center align-items-center h-100">

@@ -63,7 +63,7 @@
         }
         else
         {
-            pstmt=conn.prepareStatement("Insert into CUSTOMERS (accno,firstname,lastname,aadhar,mobile,dob,address,gender) values(?,?,?,?,?,?,?,?,?)");
+            pstmt=conn.prepareStatement("Insert into CUSTOMERS (accno,firstname,lastname,aadhar,mobile,dob,address,gender) values(?,?,?,?,?,?,?,?)");
             pstmt.setString(1,accno);
             pstmt.setString(2,fname);
             pstmt.setString(3,lname);
