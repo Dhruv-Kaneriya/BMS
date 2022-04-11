@@ -88,6 +88,23 @@
         </div>
     </div>
 </section>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script id="rendered-js" >
+    var fromaccno = document.getElementById("fromaccountno"),
+        toaccno = document.getElementById("toaccountno");
+
+    function validateAccountNo() {
+        if (fromaccno.value == toaccno.value) {
+            toaccno.setCustomValidity("Same Account Numbers not allowed!");
+        } else {
+           toaccno.setCustomValidity('');
+        }
+    }
+
+    fromaccno.onchange = validateAccountNo;
+    toaccno.onkeyup = validateAccountNo;
+    //# sourceURL=pen.js
+</script>
 
 </body>
 </html>
