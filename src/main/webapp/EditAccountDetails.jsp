@@ -82,7 +82,7 @@
 
 <jsp:include page="navbar.jsp" />
 
-<section class=" gradient-custom">
+<section class="gradient-custom">
   <div class="container py-5 h-100">
     <div class="row justify-content-center align-items-center h-100">
       <div class="col-12 col-lg-9 col-xl-7">
@@ -101,11 +101,13 @@
           </div>
 
           <div id="display_block"  class="p-4 p-md-5" style="display: none; ">
-            <div style="display: flex"> <p>Name : </p> <p id="first_name"></p></div>
-           <div style="display: flex"><p>Balance Available : </p><p id="balance"></p></div>
+              <div style="margin: auto" class="row align-items-center">
+            <div style="display: flex;align-items: center;justify-content: center"> <p>Name : </p> <p id="first_name"></p></div>
+           <div style="display: flex;align-items: center;justify-content: center"><p>Balance Available : </p><p id="balance"></p></div>
 
-            <button class="btn btn-primary" id="edit_btn" > Edit Account </button>
-            <button class="btn btn-danger" id="delete_btn"> Delete Account </button>
+            <button class="btn btn-primary m-2" id="edit_btn" > Edit Account </button>
+            <button class="btn btn-danger m-2" id="delete_btn"> Delete Account </button>
+              </div>
           </div>
         </div>
 
