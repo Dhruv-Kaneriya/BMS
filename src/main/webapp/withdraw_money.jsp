@@ -51,7 +51,7 @@
                 String rand_int1 = UUID.randomUUID().toString();
                 pstmt.setString(4, (rand_int1));
                 pstmt.setFloat(5,Float.parseFloat(amount));
-                pstmt.executeQuery();
+                pstmt.executeUpdate();
 
                 if(status == 1){
                     conn.commit();

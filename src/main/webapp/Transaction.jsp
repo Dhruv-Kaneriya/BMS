@@ -62,7 +62,7 @@
                                     conn = DatabaseConnection.initializeDatabase();
                                     PreparedStatement pstm=conn.prepareStatement("select * \n" +
                                             "                   from ( select a.*, rownum rnum\n" +
-                                            "                            from ( Select * from TRANSACTIONS ORDER BY TRANSACTION_ID ) a\n" +
+                                            "                            from ( Select * from TRANSACTIONS ORDER BY TRANSACTION_TIMESTAMP DESC) a\n" +
                                             "                           where rownum <= ? )\n" +
                                             "                  where rnum >= ?");
 
